@@ -2,6 +2,9 @@ import socket
 import tkinter as tk
 from tkinter import ttk
 
+def help_user():
+	print("Hello world")
+
 def gettxt():
     text_from_entry = entry.get()
     number = pick_number.get()
@@ -62,18 +65,30 @@ def send(text, number):
 
 
 root = tk.Tk()
-root.geometry("500x500")
-root['bg'] = 'white'
-entry = tk.Entry(fg = "DeepSkyBlue2", bg = "white", width = 50, font = "Calibri 30")
-button = tk.Button(fg = "DeepSkyBlue2", bg = "white", text = "Отправить", command = gettxt, font = "Calibri 15")
-label = tk.Label(fg = "DeepSkyBlue2", bg = "white", width = 50, font = "Calibri 30", text="Команды")
-label1 = tk.Label(fg = "DeepSkyBlue2", bg = "white", width = 50, font = "Calibri 30", text="Номер компьютера")
+root.geometry("854x480")
+root['bg'] = 'gray10'
+
+entry = tk.Entry(fg = "DarkOrange2", bg = "gray17", width = 50, font = "Calibri 20")
+
+send_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Отправить", command = gettxt, font = "Calibri 15")
+help_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "?", command = help_user, font = "Calibri 15")
+
+num_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Номер компьютера")
+commands_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Команды")
+
 pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"])
-label1.pack()
-pick_number.pack()
-label.pack()
-entry.pack()
-button.pack()
+
+num_label.place(x = 40, y = 20)
+commands_label.place(x = 40, y = 130)
+
+pick_number.place(x = 40, y = 90, height=30, width=130)
+
+entry.place(x = 40, y = 200, height=30, width=400)
+
+send_button.place(x = 724, y = 450, height=30, width=130)
+help_button.place(x = 821, y = 4, height=30, width=30)
+
+
 root.mainloop()
 
 
