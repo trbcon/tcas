@@ -1,29 +1,28 @@
 import socket, os, keyboard
 
-file = open("ipu.txt", "r")
-ip = file.readline()
-ip = ip.replace("\n", "")
-file.close()
+f = open('text.txt', 'w')
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind((ip, 55000))
+sock.bind((socket.gethostbyname(socket.gethostname()), 55000))
 sock.listen(10) 
 while True:
     conn, addr = sock.accept()
     print('connected:', addr)
     data = conn.recv(1024)
     print(str(data))
-    com = str(data).replace('b\'', '').replace('\'', '')
-    if com == 'off':
-        os.system('shutdown /s')
-    elif com == 'close':
+    com = str(data).replace("b\'", "").replace("\'", "")
+    if com == "off":
+        os.system("shutdown /s")
+    elif com == "close":
         keyboard.press_and_release('alt + f4')
-    elif com == 'oi':
-        os.system("taskkill /IM kb.exe /f")
-    elif com == 'ki':
+    elif com == "app_on":
+        os.system("taskkill /IM kill_app.exe /f")
+    elif "app_off" in com:
+        com = com.replace("app_off ", "")
+        f.write(com)
         os.startfile("kb.exe")
-    elif 'send ' in com:
-        com = com.replace("send ", "")
+    elif "!" in com:
+        com = com.replace("!", "")
         text = com
         text = text.replace("10 ", "и")
         text = text.replace("11 ", "й")
@@ -58,9 +57,8 @@ while True:
         text = text.replace("7 ", "ё")
         text = text.replace("8 ", "ж")
         text = text.replace("9 ", "з")
-        f = open('text.txt', 'w')
         f.write(text)
-        f.close()
         os.startfile("mes.exe")
     conn.send(data)
 conn.close()
+f.close()

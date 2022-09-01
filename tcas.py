@@ -2,19 +2,15 @@ import socket
 import tkinter as tk
 from tkinter import ttk
 
-file = open("ip.txt", "r")
+def gettxt():
+    text_from_entry = entry.get()
+    number = pick_number.get()
+    send(text_from_entry, number)
 
-cipter = ["а", "б", "в", "г", ]
-
-def send(text, a, num):
+def send(text, number):
 	perem = 0
-	file = open("ip.txt", "r")
-	while perem != num:
-		ip = file.readline()
-		perem += 1
-	print(ip)
-	file.close()
-	if "send " in text:
+
+	if "!" in text:
 		text = text.replace("а", "1 ")
 		text = text.replace("б", "2 ")
 		text = text.replace("в", "3 ")
@@ -48,24 +44,20 @@ def send(text, a, num):
 		text = text.replace("э", "31 ")
 		text = text.replace("ю", "32 ")
 		text = text.replace("я", "33 ")
-	ip = ip.replace("\n", "")
-	while text != '' and a == 0:
-		try:
-			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			sock.connect((ip, 55000))
-			sock.send(bytes(text, encoding = 'UTF-8'))
-			data = sock.recv(1024)
-			print(data)
-			sock.close()
-			a += 1
-		except:
-			pass
 
-def gettxt():
-    txt_from_entry = entry.get()
-    number = pick_number.get()
-    print(number)
-    send(txt_from_entry, 0, int(number))
+	file = open("ip.txt", "r")
+	while perem != int(number):
+		ip = file.readline()
+		perem += 1
+	ip = ip.replace("\n", "")
+	file.close()
+
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	sock.connect((ip, 55000))
+	sock.send(bytes(text, encoding = 'UTF-8'))
+	data = sock.recv(1024)
+	print(data)
+	sock.close()
 
 
 
@@ -76,7 +68,7 @@ entry = tk.Entry(fg = "DeepSkyBlue2", bg = "white", width = 50, font = "Calibri 
 button = tk.Button(fg = "DeepSkyBlue2", bg = "white", text = "Отправить", command = gettxt, font = "Calibri 15")
 label = tk.Label(fg = "DeepSkyBlue2", bg = "white", width = 50, font = "Calibri 30", text="Команды")
 label1 = tk.Label(fg = "DeepSkyBlue2", bg = "white", width = 50, font = "Calibri 30", text="Номер компьютера")
-pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"])
 label1.pack()
 pick_number.pack()
 label.pack()
