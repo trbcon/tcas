@@ -3,16 +3,16 @@ import tkinter as tk
 from tkinter import ttk
 
 def help_user():
-	print("Hello world")
+	window = tk.Toplevel(root)
+	window.geometry("854x480")
+	window['bg'] = 'gray10'
 
 def gettxt():
-    text_from_entry = entry.get()
+    text = entry.get()
     number = pick_number.get()
-    send(text_from_entry, number)
+    cipter(text, number)
 
-def send(text, number):
-	perem = 0
-
+def cipter(text, number):
 	if "!" in text:
 		text = text.replace("а", "1 ")
 		text = text.replace("б", "2 ")
@@ -48,6 +48,14 @@ def send(text, number):
 		text = text.replace("ю", "32 ")
 		text = text.replace("я", "33 ")
 
+	if number != "all":
+		send_one(text, number)
+	else:
+		send_all(text)
+
+def send_one(text, number):
+	perem = 0
+
 	file = open("ip.txt", "r")
 	while perem != int(number):
 		ip = file.readline()
@@ -55,12 +63,25 @@ def send(text, number):
 	ip = ip.replace("\n", "")
 	file.close()
 
+	connect_and_send(ip, text)
+
+def connect_and_send(ip, text):
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	sock.connect((ip, 55000))
 	sock.send(bytes(text, encoding = 'UTF-8'))
 	data = sock.recv(1024)
 	print(data)
 	sock.close()
+
+def send_all(text):
+	file = open("ip.txt", "r")
+
+	for i in range(1, 11):
+		ip = file.readline()
+		ip = ip.replace("\n", "")
+		connect_and_send(ip, text)
+
+	file.close()
 
 
 
@@ -76,7 +97,7 @@ help_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "?", command = 
 num_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Номер компьютера")
 commands_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Команды")
 
-pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"])
+pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "all"])
 
 num_label.place(x = 40, y = 20)
 commands_label.place(x = 40, y = 130)
