@@ -1,16 +1,18 @@
 import socket, os, keyboard
 
-f = open('text.txt', 'w')
+file = open('text.txt', 'w')
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((socket.gethostbyname(socket.gethostname()), 55000))
 sock.listen(10) 
+
 while True:
     conn, addr = sock.accept()
     print('connected:', addr)
     data = conn.recv(1024)
     print(str(data))
     com = str(data).replace("b\'", "").replace("\'", "")
+
     if com == "off":
         os.system("shutdown /s")
     elif com == "close":
@@ -19,8 +21,8 @@ while True:
         os.system("taskkill /IM kill_app.exe /f")
     elif "app_off" in com:
         com = com.replace("app_off ", "")
-        f.write(com)
-        os.startfile("kb.exe")
+        file.write(com)
+        os.startfile("kill_app.exe")
     elif "!" in com:
         com = com.replace("!", "")
         text = com
@@ -57,8 +59,8 @@ while True:
         text = text.replace("7 ", "ё")
         text = text.replace("8 ", "ж")
         text = text.replace("9 ", "з")
-        f.write(text)
+        file.write(text)
         os.startfile("mes.exe")
     conn.send(data)
 conn.close()
-f.close()
+file.close()

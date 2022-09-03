@@ -7,7 +7,7 @@ def help_user():
 	window.geometry("854x480")
 	window['bg'] = 'gray10'
 
-def gettxt():
+def get_text():
     text = entry.get()
     number = pick_number.get()
     cipter(text, number)
@@ -65,14 +65,6 @@ def send_one(text, number):
 
 	connect_and_send(ip, text)
 
-def connect_and_send(ip, text):
-	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	sock.connect((ip, 55000))
-	sock.send(bytes(text, encoding = 'UTF-8'))
-	data = sock.recv(1024)
-	print(data)
-	sock.close()
-
 def send_all(text):
 	file = open("ip.txt", "r")
 
@@ -83,6 +75,14 @@ def send_all(text):
 
 	file.close()
 
+def connect_and_send(ip, text):
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	sock.connect((ip, 55000))
+	sock.send(bytes(text, encoding = 'UTF-8'))
+	data = sock.recv(1024)
+	print(data)
+	sock.close()
+
 
 
 root = tk.Tk()
@@ -91,7 +91,7 @@ root['bg'] = 'gray10'
 
 entry = tk.Entry(fg = "DarkOrange2", bg = "gray17", width = 50, font = "Calibri 20")
 
-send_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Отправить", command = gettxt, font = "Calibri 15")
+send_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Отправить", command = get_text, font = "Calibri 15")
 help_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "?", command = help_user, font = "Calibri 15")
 
 num_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Номер компьютера")
