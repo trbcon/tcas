@@ -7,6 +7,11 @@ def help_user():
 	window.geometry("854x480")
 	window['bg'] = 'gray10'
 
+def settings():
+	stg = tk.Toplevel(root)
+	stg.geometry("854x480")
+	stg['bg'] = 'gray10'
+
 def get_text():
     text = entry.get()
     number = pick_number.get()
@@ -87,7 +92,7 @@ def connect_and_send(ip, text):
 		print(ip)
 
 
-
+# Графический интерфейс
 root = tk.Tk()
 root.geometry("854x480")
 root['bg'] = 'gray10'
@@ -96,6 +101,7 @@ entry = tk.Entry(fg = "DarkOrange2", bg = "gray17", width = 50, font = "Calibri 
 
 send_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Отправить", command = get_text, font = "Calibri 15")
 help_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "?", command = help_user, font = "Calibri 15")
+settings_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Настройки", command = settings, font = "Calibri 15")
 
 num_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Номер компьютера")
 commands_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Команды")
@@ -111,8 +117,7 @@ entry.place(x = 40, y = 200, height=30, width=400)
 
 send_button.place(x = 724, y = 450, height=30, width=130)
 help_button.place(x = 821, y = 4, height=30, width=30)
-
+settings_button.place(x = 700, y = 4, height=30, width=120)
 
 root.mainloop()
-
-
+ 
