@@ -1,9 +1,5 @@
-import socket
-import sys
-import cv2
-import pickle
+import socket, sys, cv2, pickle, struct
 import numpy as np
-import struct
 from PIL import Image
  
 HOST = 'localhost'
