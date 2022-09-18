@@ -1,4 +1,7 @@
+from email import message
 import socket, os, keyboard
+
+message_to_teacher = "done"
 
 file = open('text.txt', 'w')
 
@@ -18,7 +21,27 @@ while True:
     elif com == "close":
         keyboard.press_and_release('alt + f4')
     elif com == "app_on":
-        os.system("taskkill /IM kill_app.exe /f")
+        try:
+            os.system("taskkill /IM kill_app.exe /f")
+        except:
+            message_to_teacher = "error 2"
+
+    elif "rpl " in com:
+        com = com.replace("rpl", "")
+        p1, p2 = com.split()
+        try:
+            os.replace(p1, p2)
+        except:
+            message_to_teacher = "error 1"
+    elif "cmd " in com:
+        com = com.replace("cmd ", "")
+        try:
+            os.system(com)
+        except:
+            message_to_teacher = "error 3"
+    # elif "open " in com:
+    #     com = com.replace("open ","")
+    #     os.system(com)
     elif "app_off" in com:
         com = com.replace("app_off ", "")
         file.write(com)
@@ -60,7 +83,7 @@ while True:
         text = text.replace("8 ", "ж")
         text = text.replace("9 ", "з")
         file.write(text)
-        os.startfile("mes.exe")
-    conn.send(data)
+        os.startfile("message.exe")
+    conn.send(message_to_teacher)
 conn.close()
 file.close()
