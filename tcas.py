@@ -6,6 +6,8 @@ def help_user():
 	window = tk.Toplevel(root)
 	window.geometry("854x480")
 	window['bg'] = 'gray10'
+	help_label = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 20", text="")
+	help_label.place(x = 4, y = 4)
 
 def settings():
 	stg = tk.Toplevel(root)
@@ -103,17 +105,17 @@ send_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Отправи
 help_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "?", command = help_user, font = "Calibri 15")
 settings_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Настройки", command = settings, font = "Calibri 15")
 
-num_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Номер компьютера")
-commands_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 30", text="Команды")
+num_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 20", text="Номер компьютера")
+commands_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 20", text="Команды")
 
 pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "all"])
 
 num_label.place(x = 40, y = 20)
-commands_label.place(x = 40, y = 130)
+commands_label.place(x = 40, y = 110)
 
-pick_number.place(x = 40, y = 90, height=30, width=130)
+pick_number.place(x = 40, y = 70, height=30, width=130)
 
-entry.place(x = 40, y = 200, height=30, width=400)
+entry.place(x = 40, y = 170, height=30, width=400)
 
 send_button.place(x = 724, y = 450, height=30, width=130)
 help_button.place(x = 821, y = 4, height=30, width=30)
