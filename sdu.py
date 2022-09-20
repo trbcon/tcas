@@ -1,8 +1,12 @@
-import socket, sys, cv2, pickle, struct
+import socket
+import sys
+import cv2
+import pickle
 import numpy as np
+import struct
 from PIL import Image
  
-HOST = 'localhost'
+HOST = socket.gethostbyname(socket.gethostname()
 PORT = 7777
  
 s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,5 +38,5 @@ while True:
     frame=pickle.loads(frame_data)
     print(frame.size)
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    cv2.imshow('Заголовок окна', frame)
+    cv2.imshow('tsd', frame)
     cv2.waitKey(10)

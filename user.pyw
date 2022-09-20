@@ -25,6 +25,10 @@ while True:
             os.system("taskkill /IM kill_app.exe /f")
         except:
             message_to_teacher = "error 2"
+    elif com == "sd":
+        os.startfile("sdu.exe")
+    elif com == "csd":
+        os.system("taskkill /IM sdu.exe /f")
 
     elif "rpl " in com:
         com = com.replace("rpl", "")
