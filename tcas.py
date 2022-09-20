@@ -53,6 +53,8 @@ def cipter(text, number):
 		text = text.replace("ю", "32 ")
 		text = text.replace("я", "33 ")
 
+	print(text)
+	
 	if number != "all":
 		if text == "sd":
 			sdft_file = open("sdft.txt", "w")

@@ -25,6 +25,13 @@ while True:
             os.system("taskkill /IM kill_app.exe /f")
         except:
             message_to_teacher = "error 2"
+<<<<<<< HEAD:user.py
+=======
+    elif com == "sd":
+        os.startfile("sdu.exe")
+    elif com == "csd":
+        os.system("taskkill /IM sdu.exe /f")
+>>>>>>> trbcon:user.pyw
 
     elif "rpl " in com:
         com = com.replace("rpl", "")
