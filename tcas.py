@@ -5,9 +5,25 @@ from tkinter import ttk
 def help_user():
 	window = tk.Toplevel(root)
 	window.geometry("854x480")
-	window['bg'] = 'gray10'
-	help_label = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 20", text="")
-	help_label.place(x = 4, y = 4)
+	window['bg'] = 'gray10' 
+
+	help_label_1 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="1) Все сообщения, кроме команд, должны начинаться с \"!\"")
+	help_label_2 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="2) Команды:")
+	help_label_5 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="off - выключает компьютер")
+	help_label_6 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="close - закрывает вкладку которая на данный момент открыта")
+	help_label_7 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="app_off имя программы - запрещает доступ к данной программе")
+	help_label_8 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="app_on имя программы - разрешает доступ к данной программе")
+	help_label_9 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="rpl (файл) (папка) - перемещает файл в заданную папку.\n Например: E:/floader/text.txt C:/Users/User/floader")
+	help_label_10 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="cmd команда - выполняет команду на компьютере ученика.\n Например cmd notepad.exe (открывает блокнот) ")
+
+	help_label_1.place(x = 4, y = 4)
+	help_label_2.place(x = 4, y = 34)
+	help_label_5.place(x = 4, y = 64)
+	help_label_6.place(x = 4, y = 94)
+	help_label_7.place(x = 4, y = 124)
+	help_label_8.place(x = 4, y = 154)
+	help_label_9.place(x = 4, y = 184)
+	help_label_10.place(x = 4, y = 234)
 
 def settings():
 	stg = tk.Toplevel(root)
