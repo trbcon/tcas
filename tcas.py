@@ -15,7 +15,7 @@ def help_user():
 	help_label_8 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="app_on имя программы - разрешает доступ к данной программе")
 	help_label_9 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="rpl (файл) (папка) - перемещает файл в заданную папку.\n Например: E:/floader/text.txt C:/Users/User/floader")
 	help_label_10 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="cmd команда - выполняет команду на компьютере ученика.\n Например cmd notepad.exe (открывает блокнот) ")
-
+	
 	help_label_1.place(x = 4, y = 4)
 	help_label_2.place(x = 4, y = 34)
 	help_label_5.place(x = 4, y = 64)
