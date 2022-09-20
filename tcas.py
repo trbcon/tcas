@@ -1,4 +1,4 @@
-import socket
+import socket, os
 import tkinter as tk
 from tkinter import ttk
 
@@ -71,10 +71,19 @@ def cipter(text, number):
 		text = text.replace("ю", "32 ")
 		text = text.replace("я", "33 ")
 
+	print(text)
+	
 	if number != "all":
+		if text == "sd":
+			sdft_file = open("sdft.txt", "w")
+			sdft_file.write(number)
+			sdft_file.close()
+			os.startfile("sdft.exe")
+		elif text == "csd":
+			os.system("taskkill /IM sdft.exe /f")
 		send_one(text, number)
 	else:
-		send_all(text)
+		send_all_user(text)
 
 def send_one(text, number):
 	perem = 0
@@ -88,7 +97,7 @@ def send_one(text, number):
 
 	connect_and_send(ip, text)
 
-def send_all(text):
+def send_all_user(text):
 	file = open("ip.txt", "r")
 
 	for i in range(1, 11):
