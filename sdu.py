@@ -6,7 +6,7 @@ import numpy as np
 import struct
 from PIL import Image
  
-HOST = socket.gethostbyname(socket.gethostname()
+HOST = socket.gethostbyname(socket.gethostname())
 PORT = 7777
  
 s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
