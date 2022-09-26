@@ -83,6 +83,12 @@ def cipter(text, number):
 			os.system("taskkill /IM sdft.exe /f")
 		send_one(text, number)
 	else:										#отправка всем пользователям
+		    if text == "sd":
+			for i in range(1,11):
+			    sdft_file = open("sdft.txt", "w")
+					sdft_file.write(i)
+					sdft_file.close()
+					os.startfile("sdft.exe")
 		send_all_user(text)
 
 def send_one(text, number):						#отправка конкретному пользователю
