@@ -52,7 +52,7 @@ def get_text():
 
 
 def cipter(text, number):
-	if "!" in text:
+	if "!" in text:                      #шифрование текста для корректного вывода кирилицы
 		text = text.replace("а", "1 ")
 		text = text.replace("б", "2 ")
 		text = text.replace("в", "3 ")
@@ -89,13 +89,13 @@ def cipter(text, number):
 
 	print(text)
 	
-	if number != "all":
-		if text == "sd":
+	if number != "all":							#отправка конкретному пользователю
+		if text == "sd":						#включение демонстрации экрана если text равна sd
 			sdft_file = open("sdft.txt", "w")
 			sdft_file.write(number)
 			sdft_file.close()
 			os.startfile("sdft.exe")
-		elif text == "csd":
+		elif text == "csd":						#выключение демонстрации экрана если text равна csd
 			os.system("taskkill /IM sdft.exe /f")
 		send_one(text, number)
 	else:                                        #отправка всем пользователям
@@ -107,7 +107,7 @@ def cipter(text, number):
 				os.startfile("sdft.exe")
 		send_all_user(text)
 
-def send_one(text, number):
+def send_one(text, number):						#отправка конкретному пользователю
 	perem = 0
 
 	file = open("ip.txt", "r")
@@ -119,7 +119,7 @@ def send_one(text, number):
 
 	connect_and_send(ip, text)
 
-def send_all_user(text):
+def send_all_user(text):						#отправка всем пользователям
 	file = open("ip.txt", "r")
 
 	for i in range(1, 11):
@@ -129,7 +129,7 @@ def send_all_user(text):
 
 	file.close()
 
-def connect_and_send(ip, text):
+def connect_and_send(ip, text):					#подключение и отправка
 	try:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.connect((ip, 55000))
@@ -169,3 +169,4 @@ help_button.place(x = 821, y = 4, height=30, width=30)
 settings_button.place(x = 700, y = 4, height=30, width=120)
 
 root.mainloop()
+
