@@ -1,6 +1,12 @@
 import socket, os
 import tkinter as tk
 from tkinter import ttk
+from tkinter.colorchooser import askcolor
+
+def fg_settings():
+	fg_color = askcolor()[1]
+	print(fg_color)
+
 
 def help_user():
 	window = tk.Toplevel(root)
@@ -15,7 +21,9 @@ def help_user():
 	help_label_8 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="app_on имя программы - разрешает доступ к данной программе")
 	help_label_9 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="rpl (файл) (папка) - перемещает файл в заданную папку.\n Например: E:/floader/text.txt C:/Users/User/floader")
 	help_label_10 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="cmd команда - выполняет команду на компьютере ученика.\n Например cmd notepad.exe (открывает блокнот) ")
-	
+	help_label_11 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="sd команда - включает демонстрацию экрана учительского экрана ученику")
+	help_label_12 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="сsd команда - выключает демонстрацию экрана учительского экрана ученику")
+
 	help_label_1.place(x = 4, y = 4)
 	help_label_2.place(x = 4, y = 34)
 	help_label_5.place(x = 4, y = 64)
@@ -24,12 +32,17 @@ def help_user():
 	help_label_8.place(x = 4, y = 154)
 	help_label_9.place(x = 4, y = 184)
 	help_label_10.place(x = 4, y = 234)
+	help_label_11.place (x = 4, y = 294)
+	help_label_12.place (x = 4, y = 324)
 
 def settings():
 	stg = tk.Toplevel(root)
 	stg.geometry("854x480")
 	stg['bg'] = 'gray10'
-	pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "all"])
+
+	save_button = tk.Button(stg, fg = "DarkOrange2", bg = "gray1", text = "Цвет текста", command = fg_settings, font = "Calibri 15")
+
+	save_button.place(x = 724, y = 450, height=30, width=130)
 
 def get_text():
     text = entry.get()
