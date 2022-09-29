@@ -29,11 +29,14 @@ def settings():
 	stg = tk.Toplevel(root)
 	stg.geometry("854x480")
 	stg['bg'] = 'gray10'
+	pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "all"])
 
 def get_text():
     text = entry.get()
     number = pick_number.get()
     cipter(text, number)
+
+
 
 def cipter(text, number):
 	if "!" in text:
@@ -82,7 +85,13 @@ def cipter(text, number):
 		elif text == "csd":
 			os.system("taskkill /IM sdft.exe /f")
 		send_one(text, number)
-	else:
+	else:                                        #отправка всем пользователям
+		if text == "sd":
+			for i in range(1,11):
+				sdft_file = open("sdft.txt", "w")
+				sdft_file.write(i)
+				sdft_file.close()
+				os.startfile("sdft.exe")
 		send_all_user(text)
 
 def send_one(text, number):
@@ -147,4 +156,3 @@ help_button.place(x = 821, y = 4, height=30, width=30)
 settings_button.place(x = 700, y = 4, height=30, width=120)
 
 root.mainloop()
- 
