@@ -1,21 +1,54 @@
 import socket, os
 import tkinter as tk
 from tkinter import ttk
+from tkinter.colorchooser import askcolor
+
+conf = open("cfg.txt", "r")
+fore_grount = conf.readline().replace("\n", "")
+back_ground = conf.readline().replace("\n", "")
+conf.close()
+if fore_grount == "":
+	fore_grount = "snow"
+	back_ground = "gray10"
+
+def fg_save():
+	try:
+		fg_color = askcolor()[1]
+		conf = open("cfg.txt", "r")
+		conf.readline()
+		bg_color = conf.readline()
+		conf.close()
+		conf = open("cfg.txt", "w")
+		conf.write(fg_color + "\n" + bg_color)
+		conf.close()
+	except:
+		pass
+
+def bg_save():
+	bg_color = askcolor()[1]
+	conf = open("cfg.txt", "r")
+	fg_color = conf.readline()
+	conf.close()
+	conf = open("cfg.txt", "w")
+	conf.write(fg_color + bg_color + "\n")
+	conf.close()
 
 def help_user():
 	window = tk.Toplevel(root)
 	window.geometry("854x480")
-	window['bg'] = 'gray10' 
+	window['bg'] = back_ground 
 
-	help_label_1 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="1) Все сообщения, кроме команд, должны начинаться с \"!\"")
-	help_label_2 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="2) Команды:")
-	help_label_5 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="off - выключает компьютер")
-	help_label_6 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="close - закрывает вкладку которая на данный момент открыта")
-	help_label_7 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="app_off имя программы - запрещает доступ к данной программе")
-	help_label_8 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="app_on имя программы - разрешает доступ к данной программе")
-	help_label_9 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="rpl (файл) (папка) - перемещает файл в заданную папку.\n Например: E:/floader/text.txt C:/Users/User/floader")
-	help_label_10 = tk.Label(window, fg = "DarkOrange1", bg = "gray10", font = "Calibri 15", text="cmd команда - выполняет команду на компьютере ученика.\n Например cmd notepad.exe (открывает блокнот) ")
-	
+	help_label_1 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="1) Все сообщения, кроме команд, должны начинаться с \"!\"")
+	help_label_2 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="2) Команды:")
+	help_label_5 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="off - выключает компьютер")
+	help_label_6 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="close - закрывает вкладку которая на данный момент открыта")
+	help_label_7 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="app_off имя программы - запрещает доступ к данной программе")
+	help_label_8 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="app_on имя программы - разрешает доступ к данной программе")
+	help_label_9 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="rpl (файл) (папка) - перемещает файл в заданную папку.\n Например: E:/floader/text.txt C:/Users/User/floader")
+	help_label_10 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="cmd команда - выполняет команду на компьютере ученика.\n Например cmd notepad.exe (открывает блокнот) ")
+	help_label_11 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="sd команда - включает демонстрацию экрана учительского экрана ученику")
+	help_label_12 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="сsd команда - выключает демонстрацию экрана учительского экрана ученику")
+
 	help_label_1.place(x = 4, y = 4)
 	help_label_2.place(x = 4, y = 34)
 	help_label_5.place(x = 4, y = 64)
@@ -24,16 +57,26 @@ def help_user():
 	help_label_8.place(x = 4, y = 154)
 	help_label_9.place(x = 4, y = 184)
 	help_label_10.place(x = 4, y = 234)
+	help_label_11.place (x = 4, y = 294)
+	help_label_12.place (x = 4, y = 324)
 
 def settings():
 	stg = tk.Toplevel(root)
 	stg.geometry("854x480")
-	stg['bg'] = 'gray10'
+	stg['bg'] = back_ground
 
-def get_text():									#получение текста
+	fg_save_button = tk.Button(stg, fg = back_ground, bg = fore_grount, text = "Цвет текста", command = fg_save, font = "Calibri 15")
+	bg_save_button = tk.Button(stg, fg = back_ground, bg = fore_grount, text = "Цвет фона", command = bg_save, font = "Calibri 15")
+
+	fg_save_button.place(x = 4, y = 4, height=30, width=130)
+	bg_save_button.place(x = 4, y = 38, height = 30, width = 130)
+
+def get_text():
     text = entry.get()
     number = pick_number.get()
     cipter(text, number)
+
+
 
 def cipter(text, number):
 	if "!" in text:                      #шифрование текста для корректного вывода кирилицы
@@ -82,7 +125,13 @@ def cipter(text, number):
 		elif text == "csd":						#выключение демонстрации экрана если text равна csd
 			os.system("taskkill /IM sdft.exe /f")
 		send_one(text, number)
-	else:										#отправка всем пользователям
+	else:                                        #отправка всем пользователям
+		if text == "sd":
+			for i in range(1,11):
+				sdft_file = open("sdft.txt", "w")
+				sdft_file.write(i)
+				sdft_file.close()
+				os.startfile("sdft.exe")
 		send_all_user(text)
 
 def send_one(text, number):						#отправка конкретному пользователю
@@ -122,16 +171,16 @@ def connect_and_send(ip, text):					#подключение и отправка
 # Графический интерфейс
 root = tk.Tk()
 root.geometry("854x480")
-root['bg'] = 'gray10'
+root['bg'] = back_ground
 
-entry = tk.Entry(fg = "DarkOrange2", bg = "gray17", width = 50, font = "Calibri 20")
+entry = tk.Entry(fg = fore_grount, bg = fore_grount, width = 50, font = "Calibri 20")
 
-send_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Отправить", command = get_text, font = "Calibri 15")
-help_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "?", command = help_user, font = "Calibri 15")
-settings_button = tk.Button(fg = "DarkOrange2", bg = "gray1", text = "Настройки", command = settings, font = "Calibri 15")
+send_button = tk.Button(fg = back_ground, bg = fore_grount, text = "Отправить", command = get_text, font = "Calibri 15")
+help_button = tk.Button(fg = back_ground, bg = fore_grount, text = "?", command = help_user, font = "Calibri 15")
+settings_button = tk.Button(fg = back_ground, bg = fore_grount, text = "Настройки", command = settings, font = "Calibri 15")
 
-num_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 20", text="Номер компьютера")
-commands_label = tk.Label(fg = "DarkOrange1", bg = "gray10", font = "Calibri 20", text="Команды")
+num_label = tk.Label(fg = fore_grount, bg = back_ground, font = "Calibri 20", text="Номер компьютера")
+commands_label = tk.Label(fg = fore_grount, bg = back_ground, font = "Calibri 20", text="Команды")
 
 pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "all"])
 
@@ -147,4 +196,3 @@ help_button.place(x = 821, y = 4, height=30, width=30)
 settings_button.place(x = 700, y = 4, height=30, width=120)
 
 root.mainloop()
- 
