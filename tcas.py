@@ -10,6 +10,8 @@ conf.close()
 if fore_grount == "":
 	fore_grount = "snow"
 	back_ground = "gray10"
+elif back_ground == "":
+	back_ground = "gray10"
 
 def fg_save():
 	try:
