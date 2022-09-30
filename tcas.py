@@ -35,6 +35,7 @@ def bg_save():
 	conf.write(fg_color + bg_color + "\n")
 	conf.close()
 
+
 def help_user():
 	window = tk.Toplevel(root)
 	window.geometry("854x480")
