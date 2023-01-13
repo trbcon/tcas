@@ -1,7 +1,17 @@
+from PyQt5 import QtWidgets, uic
 import socket, os
-import tkinter as tk
-from tkinter import ttk
 from tkinter.colorchooser import askcolor
+
+def get_var():
+    number = ui.compL.currentText()
+    command = ui.commL.currentText()
+    if command == "message":
+        command = "!" + ui.line.text()
+    elif command == "cmd" or command == "rpl" or command == "app_off" or command == "app_on":
+        command = command + " " + ui.line.text()
+    if number != "all":
+        number = int(number)
+    cipter(command, number)
 
 conf = open("cfg.txt", "r")
 fore_grount = conf.readline().replace("\n", "")
@@ -34,52 +44,6 @@ def bg_save():
 	conf = open("cfg.txt", "w")
 	conf.write(fg_color + bg_color + "\n")
 	conf.close()
-
-
-def help_user():
-	window = tk.Toplevel(root)
-	window.geometry("854x480")
-	window['bg'] = back_ground 
-
-	help_label_1 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="1) Все сообщения, кроме команд, должны начинаться с \"!\"")
-	help_label_2 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="2) Команды:")
-	help_label_5 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="off - выключает компьютер")
-	help_label_6 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="close - закрывает вкладку которая на данный момент открыта")
-	help_label_7 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="app_off имя программы - запрещает доступ к данной программе")
-	help_label_8 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="app_on имя программы - разрешает доступ к данной программе")
-	help_label_9 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="rpl (файл) (папка) - перемещает файл в заданную папку.\n Например: E:/floader/text.txt C:/Users/User/floader")
-	help_label_10 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="cmd команда - выполняет команду на компьютере ученика.\n Например cmd notepad.exe (открывает блокнот) ")
-	help_label_11 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="sd команда - включает демонстрацию экрана учительского экрана ученику")
-	help_label_12 = tk.Label(window, fg = fore_grount, bg = back_ground, font = "Calibri 15", text="сsd команда - выключает демонстрацию экрана учительского экрана ученику")
-
-	help_label_1.place(x = 4, y = 4)
-	help_label_2.place(x = 4, y = 34)
-	help_label_5.place(x = 4, y = 64)
-	help_label_6.place(x = 4, y = 94)
-	help_label_7.place(x = 4, y = 124)
-	help_label_8.place(x = 4, y = 154)
-	help_label_9.place(x = 4, y = 184)
-	help_label_10.place(x = 4, y = 234)
-	help_label_11.place (x = 4, y = 294)
-	help_label_12.place (x = 4, y = 324)
-
-def settings():
-	stg = tk.Toplevel(root)
-	stg.geometry("854x480")
-	stg['bg'] = back_ground
-
-	fg_save_button = tk.Button(stg, fg = back_ground, bg = fore_grount, text = "Цвет текста", command = fg_save, font = "Calibri 15")
-	bg_save_button = tk.Button(stg, fg = back_ground, bg = fore_grount, text = "Цвет фона", command = bg_save, font = "Calibri 15")
-
-	fg_save_button.place(x = 4, y = 4, height=30, width=130)
-	bg_save_button.place(x = 4, y = 38, height = 30, width = 130)
-
-def get_text():
-    text = entry.get()
-    number = pick_number.get()
-    cipter(text, number)
-
-
 
 def cipter(text, number):
 	if "!" in text:                      #шифрование текста для корректного вывода кирилицы
@@ -159,43 +123,22 @@ def send_all_user(text):						#отправка всем пользовател�
 
 	file.close()
 
-def connect_and_send(ip, text):					#подключение и отправка
-	try:
-		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		sock.connect((ip, 55000))
-		sock.send(bytes(text, encoding = 'UTF-8'))
-		data = sock.recv(1024)
-		print(data)
-		sock.close()
-	except:
-		print(ip)
+def connect_and_send(ip, text):
+    try:					#подключение и отправка
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((ip, 55000))
+        sock.send(bytes(text, encoding = 'UTF-8'))
+        # data = sock.recv(1024)
+        # print(data)
+        sock.close()
+    except:
+        pass
 
+app = QtWidgets.QApplication([])
+ui = uic.loadUi("tcas.ui")
+ui.setWindowTitle("TCAS")
 
-# Графический интерфейс
-root = tk.Tk()
-root.geometry("854x480")
-root['bg'] = back_ground
+ui.okB.clicked.connect(get_var)
 
-entry = tk.Entry(fg = fore_grount, bg = fore_grount, width = 50, font = "Calibri 20")
-
-send_button = tk.Button(fg = back_ground, bg = fore_grount, text = "Отправить", command = get_text, font = "Calibri 15")
-help_button = tk.Button(fg = back_ground, bg = fore_grount, text = "?", command = help_user, font = "Calibri 15")
-settings_button = tk.Button(fg = back_ground, bg = fore_grount, text = "Настройки", command = settings, font = "Calibri 15")
-
-num_label = tk.Label(fg = fore_grount, bg = back_ground, font = "Calibri 20", text="Номер компьютера")
-commands_label = tk.Label(fg = fore_grount, bg = back_ground, font = "Calibri 20", text="Команды")
-
-pick_number = ttk.Combobox(values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "all"])
-
-num_label.place(x = 40, y = 20)
-commands_label.place(x = 40, y = 110)
-
-pick_number.place(x = 40, y = 70, height=30, width=130)
-
-entry.place(x = 40, y = 170, height=30, width=400)
-
-send_button.place(x = 724, y = 450, height=30, width=130)
-help_button.place(x = 821, y = 4, height=30, width=30)
-settings_button.place(x = 700, y = 4, height=30, width=120)
-
-root.mainloop()
+ui.show()
+app.exec()
