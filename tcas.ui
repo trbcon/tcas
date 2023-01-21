@@ -2,22 +2,19 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
-    <height>806</height>
+    <width>650</width>
+    <height>594</height>
    </rect>
-  </property>
-  <property name="contextMenuPolicy">
-   <enum>Qt::CustomContextMenu</enum>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background:rgb(229, 255, 237)</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -34,17 +31,25 @@
               <pointsize>18</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Компьютеры</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="compL">
+           <widget class="QComboBox" name="comboBox">
             <property name="font">
              <font>
               <pointsize>18</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(220, 236, 255);
+color:black;
+</string>
             </property>
             <item>
              <property name="text">
@@ -116,11 +121,15 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="commL">
+           <widget class="QComboBox" name="comL">
             <property name="font">
              <font>
               <pointsize>18</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(220, 236, 255);
+color:black;</string>
             </property>
             <item>
              <property name="text">
@@ -164,7 +173,7 @@
             </item>
             <item>
              <property name="text">
-              <string>message</string>
+              <string>script</string>
              </property>
             </item>
            </widget>
@@ -186,16 +195,19 @@
         </item>
        </layout>
       </item>
+      <item>
+       <widget class="QLineEdit" name="line">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(220, 236, 255);</string>
+        </property>
+       </widget>
+      </item>
      </layout>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="line">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-     </widget>
     </item>
     <item>
      <spacer name="verticalSpacer">
@@ -232,6 +244,9 @@
           <pointsize>18</pointsize>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(205, 203, 255)</string>
+        </property>
         <property name="text">
          <string>отправить</string>
         </property>
@@ -241,47 +256,52 @@
     </item>
    </layout>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>664</width>
+     <width>650</width>
      <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuhelp_2">
     <property name="title">
-     <string>Help</string>
+     <string>help</string>
     </property>
     <widget class="QMenu" name="menu2">
      <property name="title">
       <string>2) Команды:</string>
      </property>
+     <widget class="QMenu" name="menurpl">
+      <property name="title">
+       <string>rpl (файл) (папка) - перемещает файл в заданную папку.</string>
+      </property>
+      <addaction name="action_rpl_E_floader_text_txt_C_Users_User_floader"/>
+     </widget>
+     <widget class="QMenu" name="menucmd">
+      <property name="title">
+       <string>cmd команда - выполняет команду на компьютере ученика.</string>
+      </property>
+      <addaction name="action_cmd_notepad_exe"/>
+     </widget>
      <addaction name="actionoff"/>
      <addaction name="actionclose"/>
      <addaction name="actionapp_off"/>
      <addaction name="actionapp_on"/>
-     <addaction name="actionrpl_n_E_floader_text_txt_C_Users_User_floader"/>
-     <addaction name="actioncmd_n_cmd_notepad_exe"/>
+     <addaction name="menurpl"/>
+     <addaction name="menucmd"/>
      <addaction name="actionsd"/>
      <addaction name="action_sd"/>
+     <addaction name="actionscript"/>
     </widget>
     <addaction name="separator"/>
-    <addaction name="action1_2"/>
+    <addaction name="action1_quot_quot"/>
     <addaction name="menu2"/>
    </widget>
-   <widget class="QMenu" name="setT">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-    <addaction name="action"/>
-    <addaction name="action_2"/>
-   </widget>
    <addaction name="menuhelp_2"/>
-   <addaction name="setT"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionhelp">
    <property name="text">
     <string>help</string>
@@ -304,17 +324,34 @@ sd команда - включает демонстрацию экрана уч�
     <enum>Qt::WidgetShortcut</enum>
    </property>
   </action>
-  <action name="action1">
+  <action name="actionn">
    <property name="text">
-    <string>1</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::TextHeuristicRole</enum>
+    <string>n</string>
    </property>
   </action>
-  <action name="action1_2">
+  <action name="actioni">
    <property name="text">
-    <string>1) Все сообщения, кроме команд, должны начинаться с \&quot;!\&quot;</string>
+    <string>i</string>
+   </property>
+  </action>
+  <action name="actiong">
+   <property name="text">
+    <string>g</string>
+   </property>
+  </action>
+  <action name="actiong_2">
+   <property name="text">
+    <string>g</string>
+   </property>
+  </action>
+  <action name="actiona">
+   <property name="text">
+    <string>a</string>
+   </property>
+  </action>
+  <action name="action1_quot_quot">
+   <property name="text">
+    <string>1) Все сообщения, кроме команд, должны начинаться с \&amp;quot;!\&amp;quot;</string>
    </property>
   </action>
   <action name="actionoff">
@@ -337,14 +374,14 @@ sd команда - включает демонстрацию экрана уч�
     <string>app_on имя программы - разрешает доступ к данной программе</string>
    </property>
   </action>
-  <action name="actionrpl_n_E_floader_text_txt_C_Users_User_floader">
+  <action name="action_rpl_E_floader_text_txt_C_Users_User_floader">
    <property name="text">
-    <string>rpl (файл) (папка) - перемещает файл в заданную папку.\n Например: E:/floader/text.txt C:/Users/User/floader</string>
+    <string>Например: rpl E:/floader/text.txt C:/Users/User/floader</string>
    </property>
   </action>
-  <action name="actioncmd_n_cmd_notepad_exe">
+  <action name="action_cmd_notepad_exe">
    <property name="text">
-    <string>cmd команда - выполняет команду на компьютере ученика.\n Например cmd notepad.exe (открывает блокнот)</string>
+    <string>Например cmd notepad.exe (открывает блокнот)</string>
    </property>
   </action>
   <action name="actionsd">
@@ -357,23 +394,9 @@ sd команда - включает демонстрацию экрана уч�
     <string>сsd команда - выключает демонстрацию экрана учительского экрана ученику</string>
    </property>
   </action>
-  <action name="action">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
+  <action name="actionscript">
    <property name="text">
-    <string>цвет фона</string>
-   </property>
-   <property name="font">
-    <font/>
-   </property>
-   <property name="priority">
-    <enum>QAction::NormalPriority</enum>
-   </property>
-  </action>
-  <action name="action_2">
-   <property name="text">
-    <string>цвет текста</string>
+    <string>script</string>
    </property>
   </action>
  </widget>
