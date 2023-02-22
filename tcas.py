@@ -1,15 +1,24 @@
 from PyQt5 import QtWidgets, uic    
 import socket, os
 from tkinter.colorchooser import askcolor
+from time import sleep
 
 # ip.txt, cfs.txt, sdft.txt, scr.txt 
 
 def get_var():
 	bat_scrpit = 0
-	number = ui.compL.currentText()
-	command = ui.commL.currentText()
-	if command == "message":
+	number = ui.comNumb.currentText()
+	command = ui.comL.currentText()
+	if command == "message ":
 		command = "!" + ui.line.text()
+	elif command == "sd ":
+		number_file = open("sdft.txt", "w")
+		number_file.write(number)
+		number_file.close()
+		print("sw")
+		os.startfile("sdft.exe")
+	elif command == "csd":
+		os.system("taskkill /IM sdft.exe /f")
 	elif command == "cmd" or command == "rpl" or command == "app_off" or command == "app_on":
 		command = command + " " + ui.line.text()
 	elif command == "script":
